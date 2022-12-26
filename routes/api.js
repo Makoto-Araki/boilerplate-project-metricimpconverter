@@ -10,8 +10,18 @@ module.exports = function (app) {
 
   // GET - URL/api/convert
   app.route('/api/convert').get((req, res) => {
-    console.log(`数値 : ${convertHandler.getNum(req.query.input)}`);
-    console.log(`単位 : ${convertHandler.getUnit(req.query.input)}`);
+    let initNum = convertHandler.getNum(req.query.input);
+    let initUnit = convertHandler.getUnit(req.query.input);
+    let returnNum = convertHandler.convert(initNum, initUnit);
+    let returnUnit = convertHandler.getReturnUnit(initUnit);
+    let string = convertHandler.getString(initNum, initUnit, returnNum, returnUnit);
+    
+    res.json({
+      initNum: initNum,
+      initUnit: initUnit,
+      returnNum: returnNum,
+      returnUnit: returnUnit,
+      string: string,
+    });
   });
-  
 };

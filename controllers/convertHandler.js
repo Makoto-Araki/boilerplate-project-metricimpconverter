@@ -7,13 +7,13 @@ function ConvertHandler() {
   // Get number value from input(req.query.input)
   this.getNum = function(input) {
     let result = input.match(reg1);
-    return result;
+    return Number(result[0]);
   };
 
   // Get unit name from input(req.query.input)
   this.getUnit = function(input) {
     let result = input.match(reg2);
-    return result;
+    return result[0];
   };
 
   // Get the coresponding unit name from input(req.query.input)
@@ -45,7 +45,7 @@ function ConvertHandler() {
   // Unit name is converted to full name
   this.spellOutUnit = function(unit) {
     let result;
-    switch(initUnit) {
+    switch(unit) {
       case 'km':
         result = 'kilometers';
         break;
@@ -76,30 +76,30 @@ function ConvertHandler() {
     let result;
     switch(initUnit) {
       case 'km':
-        result = initNum / miToKm;
+        result = Number(initNum) / miToKm;
         break;
       case 'mi':
-        result = initNum * miToKm;
+        result = Number(initNum) * miToKm;
         break;
       case 'L':
-        result = initNum / galToL;
+        result = Number(initNum) / galToL;
         break;
       case 'gal':
-        result = initNum * galToL;
+        result = Number(initNum) * galToL;
         break;
       case 'lbs':
-        result = initNum * lbsToKg;
+        result = Number(initNum) * lbsToKg;
         break;
       case 'kg':
-        result = initNum / lbsToKg;
+        result = Number(initNum) / lbsToKg;
         break;
     }
-    return result;
+    return Math.round(result * 100000) / 100000;
   };
 
-  // Message in return object
+  // String property in return object
   this.getString = function(initNum, initUnit, returnNum, returnUnit) {
-    let result = `${initNum} ${spellOutUnit(initUnit)} converts to ${returnNum} ${spellOutUnit(returnUnit)}`;
+    let result = `${initNum} ${this.spellOutUnit(initUnit)} converts to ${returnNum} ${this.spellOutUnit(returnUnit)}`;
     return result;
   };
   
