@@ -47,13 +47,33 @@ function ConvertHandler() {
     let result = unit.toLowerCase();
     return result;
   };
-  
+
+  // The input value is converted according to the input unit
   this.convert = function(initNum, initUnit) {
     const galToL = 3.78541;
     const lbsToKg = 0.453592;
     const miToKm = 1.60934;
     let result;
-    
+    switch(initUnit) {
+      case 'km':
+        result = initNum / miToKm;
+        break;
+      case 'mi':
+        result = initNum * miToKm;
+        break;
+      case 'L':
+        result = initNum / galToL;
+        break;
+      case 'gal':
+        result = initNum * galToL;
+        break;
+      case 'lbs':
+        result = initNum * lbsToKg;
+        break;
+      case 'kg':
+        result = initNum / lbsToKg;
+        break;
+    }
     return result;
   };
   
