@@ -2,7 +2,7 @@ function ConvertHandler() {
   
   // Regular expressions
   const reg1 = /[0-9.]+/;
-  const reg2 = /km|mi|L|gal|lbs|kg/;
+  const reg2 = /km|mi|L|gal|lbs|kg/i;
 
   // Get number value from input(req.query.input)
   this.getNum = function(input) {
@@ -42,8 +42,9 @@ function ConvertHandler() {
     return result;
   };
 
+  // Unit name is unified to lower case
   this.spellOutUnit = function(unit) {
-    let result;
+    let result = unit.toLowerCase();
     return result;
   };
   
