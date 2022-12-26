@@ -42,9 +42,29 @@ function ConvertHandler() {
     return result;
   };
 
-  // Unit name is unified to lower case
+  // Unit name is converted to full name
   this.spellOutUnit = function(unit) {
-    let result = unit.toLowerCase();
+    let result;
+    switch(initUnit) {
+      case 'km':
+        result = 'kilometers';
+        break;
+      case 'mi':
+        result = 'miles';
+        break;
+      case 'L':
+        result = 'liters';
+        break;
+      case 'gal':
+        result = 'gallons';
+        break;
+      case 'lbs':
+        result = 'pounds';
+        break;
+      case 'kg':
+        result = 'kilograms';
+        break;
+    }
     return result;
   };
 
@@ -76,10 +96,10 @@ function ConvertHandler() {
     }
     return result;
   };
-  
+
+  // Message in return object
   this.getString = function(initNum, initUnit, returnNum, returnUnit) {
-    let result;
-    
+    let result = `${initNum} ${spellOutUnit(initUnit)} converts to ${returnNum} ${spellOutUnit(returnUnit)}`;
     return result;
   };
   
