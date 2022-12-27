@@ -3,17 +3,32 @@ function ConvertHandler() {
   // Regular expressions
   const reg1 = /[0-9.]+/;
   const reg2 = /km|mi|L|gal|lbs|kg/i;
+  const reg3 = /[0-9]+\/[0-9]+\/[0-9]+/;
 
   // Get number value from input(req.query.input)
   this.getNum = function(input) {
-    let result = input.match(reg1);
-    return Number(result[0]);
+    let result;
+    if (input.match(reg3)) {
+      result = 'invalid number and unit'
+    } else {
+      if (input.match(reg1)) {
+        result = Number(input.match(reg1)[0]);
+      } else {
+        result = Number(1);
+      }
+    }
+    return result;
   };
 
   // Get unit name from input(req.query.input)
   this.getUnit = function(input) {
-    let result = input.match(reg2);
-    return result[0];
+    let result;
+    if (input.match(reg2)) {
+      result = input.match(reg2)[0];
+    } else {
+      result = 'invalid unit';
+    }
+    return result;
   };
 
   // Get the coresponding unit name from input(req.query.input)
