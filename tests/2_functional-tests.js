@@ -27,7 +27,37 @@ suite('Functional Tests', function() {
     });
   });
 
+  // Test GET - URL/api/convert/?input=3.1mi
+  test('GET URL/api/convert/?input=3.1mi', function(done) {
+    chai
+    .request(server)
+    .get('/api/convert/?input=3.1mi')
+    .end(function(err, res) {
+      assert.equal(res.status, 200);
+      assert.equal(res.type, 'application/json');
+      assert.equal(res.body.initNum, 3.1);
+      assert.equal(res.body.initUnit, 'mi');
+      assert.equal(res.body.returnNum, 4.98895);
+      assert.equal(res.body.returnUnit, 'km');
+      assert.equal(res.body.string, '3.1 miles converts to 4.98895 kilometers');
+      done();
+    });
+  });
+
+  // Test GET - URL/hello
+  test('GET URL/hello', function(done) {
+    chai
+    .request(server)
+    .get('/hello')
+    .end(function(err, res) {
+      assert.equal(res.status, 200);
+      assert.equal(res.text, 'Hello');
+      done();
+    });
+  });
+
   // Test GET - URL/api/convert/?input=32g (invalid unit name)
+  /*
   test('GET URL/api/convert/?input=32g (invalid unit name)', function(done) {
     chai
     .request(server)
@@ -40,9 +70,10 @@ suite('Functional Tests', function() {
         console.log('BBB');
         console.dir(res);
       }
-      //assert.equal(res.status, 200);
-      //assert.equal(res.text, 'invalid unit');
+      assert.equal(res.status, 200);
+      assert.equal(res.text, 'invalid unit');
       done();
     });
   });
+  */
 });

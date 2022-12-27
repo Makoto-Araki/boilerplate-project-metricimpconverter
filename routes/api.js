@@ -17,11 +17,13 @@ module.exports = function (app) {
     let string = convertHandler.getString(initNum, initUnit, returnNum, returnUnit);
 
     if (initNum === 'invalid number and unit') {
-      res.status(200);
-      res.send('invalid number and unit');
+      res.writeHead(200, { 'Content-Type': 'text/plain' });
+      res.write('invalid number and unit');
+      res.end();
     } else if (initUnit === 'invalid unit') {
-      res.status(200);
-      res.send('invalid unit');
+      res.writeHead(200, { 'Content-Type': 'text/plain' });
+      res.write('invalid unit');
+      res.end();
     } else {
       res.json({
         initNum: initNum,
@@ -31,6 +33,13 @@ module.exports = function (app) {
         string: string,
       });
     }
+  });
+
+  // GET - URL/hello
+  app.route('/hello').get((req, res) => {
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.write('Hello');
+    res.end();
   });
   
 };
