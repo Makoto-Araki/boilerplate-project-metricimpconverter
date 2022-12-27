@@ -12,20 +12,25 @@ module.exports = function (app) {
   app.route('/api/convert').get((req, res) => {
     let initNum = convertHandler.getNum(req.query.input);
     let initUnit = convertHandler.getUnit(req.query.input);
-    if (initUnit === 'invalid unit') {
-      res.status(200);
-      res.send(initUnit);
-    }
     let returnNum = convertHandler.convert(initNum, initUnit);
     let returnUnit = convertHandler.getReturnUnit(initUnit);
     let string = convertHandler.getString(initNum, initUnit, returnNum, returnUnit);
-    
-    res.json({
-      initNum: initNum,
-      initUnit: initUnit,
-      returnNum: returnNum,
-      returnUnit: returnUnit,
-      string: string,
-    });
+
+    if (initNum === 'invalid number and unit') {
+      res.status(200);
+      res.send('invalid number and unit');
+    } else if (initUnit === 'invalid unit') {
+      res.status(200);
+      res.send('invalid unit');
+    } else {
+      res.json({
+        initNum: initNum,
+        initUnit: initUnit,
+        returnNum: returnNum,
+        returnUnit: returnUnit,
+        string: string,
+      });
+    }
   });
+  
 };
