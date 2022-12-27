@@ -6,7 +6,7 @@ let convertHandler = new ConvertHandler();
 
 suite('Unit Tests', function() {
   
-  // Function getNum Test
+  // getNum test
   suite('getNum', function() {
     test('It should correctly read a whole number input', function() {
       assert.equal(convertHandler.getNum('3.1mi'), 3.1);
@@ -28,7 +28,7 @@ suite('Unit Tests', function() {
     });
   });
 
-  // Function getUnit Test
+  // getUnit test
   suite('getUnit', function() {
     test('It should correctly read each valid input unit', function() {
       assert.equal(convertHandler.getUnit('3.1mi'), 'mi');
@@ -38,17 +38,27 @@ suite('Unit Tests', function() {
     });
   });
 
-  // Function getReturnUnit Test
+  // getReturnUnit test
   suite('getReturnUnit', function() {
     test('It should return the correct return unit for each valid input unit', function() {
       assert.equal(convertHandler.getReturnUnit('mi'), 'km');
     });
   });
 
-  // Function spellOutUnit Test
+  // spellOutUnit test
   suite('spellOutUnit', function() {
-    test('should correctly return the spelled-out string unit for each valid input unit', function() {
+    test('It should correctly return the spelled-out string unit for each valid input unit', function() {
       assert.equal(convertHandler.spellOutUnit('mi'), 'miles');
+    });
+  });
+
+  // convert test
+  suite('convert', function() {
+    test('It should correctly convert gal to L', function() {
+      assert.equal(convertHandler.convert(3.1, 'gal'), 11.73477);
+    });
+    test('It should correctly convert L to gal', function() {
+      assert.equal(convertHandler.convert(3.1, 'L'), 0.81893);
     });
   });
 });
