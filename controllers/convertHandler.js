@@ -2,14 +2,14 @@ function ConvertHandler() {
   
   // Regular expressions
   const reg1 = /[0-9.]+/;
-  const reg2 = /km|mi|L|gal|lbs|kg/i;
-  const reg3 = /[0-9]+\/[0-9]+\/[0-9]+/;
+  const reg2 = /km|mi|L|gal|lbs|kg/;
+  const reg3 = /[0-9.]+\/[0-9.]+\/[0-9.]+/;
 
   // Get number value from input(req.query.input)
   this.getNum = function(input) {
     let result;
     if (input.match(reg3)) {
-      result = 'invalid number and unit'
+      result = 'invalid number'
     } else {
       if (input.match(reg1)) {
         result = Number(input.match(reg1)[0]);

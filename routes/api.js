@@ -16,9 +16,15 @@ module.exports = function (app) {
     let returnUnit = convertHandler.getReturnUnit(initUnit);
     let string = convertHandler.getString(initNum, initUnit, returnNum, returnUnit);
 
-    if (initNum === 'invalid number and unit') {
+    console.log(initNum);
+    console.log(initUnit);
+    if (initNum === 'invalid number' && initUnit === 'invalid unit') {
       res.writeHead(200, { 'Content-Type': 'text/plain' });
       res.write('invalid number and unit');
+      res.end();
+    } else if (initNum === 'invalid number') {
+      res.writeHead(200, { 'Content-Type': 'text/plain' });
+      res.write('invalid number');
       res.end();
     } else if (initUnit === 'invalid unit') {
       res.writeHead(200, { 'Content-Type': 'text/plain' });

@@ -57,12 +57,14 @@ suite('Functional Tests', function() {
   });
 
   // Test GET - URL/api/convert/?input=32g (invalid unit name)
-  /*
+  //*
   test('GET URL/api/convert/?input=32g (invalid unit name)', function(done) {
     chai
     .request(server)
-    .get('api/convert/?input=32g')
+    .get('api/convert')
+    .query({input: '32g'})
     .end(function(err, res) {
+      /*
       if (err) {
         console.log('AAA');
         console.dir(err);
@@ -70,10 +72,13 @@ suite('Functional Tests', function() {
         console.log('BBB');
         console.dir(res);
       }
+      */
+      //*
       assert.equal(res.status, 200);
       assert.equal(res.text, 'invalid unit');
       done();
+      //*/
     });
   });
-  */
+  //*/
 });
