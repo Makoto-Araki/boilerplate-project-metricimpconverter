@@ -12,6 +12,10 @@ module.exports = function (app) {
   app.route('/api/convert').get((req, res) => {
     let initNum = convertHandler.getNum(req.query.input);
     let initUnit = convertHandler.getUnit(req.query.input);
+    if (initUnit === 'invalid unit') {
+      res.status(200);
+      res.send(initUnit);
+    }
     let returnNum = convertHandler.convert(initNum, initUnit);
     let returnUnit = convertHandler.getReturnUnit(initUnit);
     let string = convertHandler.getString(initNum, initUnit, returnNum, returnUnit);
