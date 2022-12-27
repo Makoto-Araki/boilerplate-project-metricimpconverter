@@ -60,5 +60,17 @@ suite('Unit Tests', function() {
     test('It should correctly convert L to gal', function() {
       assert.equal(convertHandler.convert(3.1, 'L'), 0.81893);
     });
+    test('It should correctly convert mi to km', function() {
+      assert.equal(convertHandler.convert(3.1, 'mi'), 4.98895);
+    });
+    test('It should correctly convert km to mi', function() {
+      assert.equal(convertHandler.convert(3.1, 'km'), 1.92626);
+    });
+    test('It should correctly convert lbs to kg', function() {
+      assert.equal(convertHandler.convert(3.1, 'lbs'), 1.40614);
+    });
+    test('It should correctly convert kg to lbs', function() {
+      assert.equal(convertHandler.convert(3.1, 'kg'), 6.83434);
+    });
   });
 });
