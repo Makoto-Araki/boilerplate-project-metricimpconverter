@@ -16,22 +16,14 @@ module.exports = function (app) {
     let returnUnit = convertHandler.getReturnUnit(initUnit);
     let string = convertHandler.getString(initNum, initUnit, returnNum, returnUnit);
 
-    console.log(initNum);
-    console.log(initUnit);
     if (initNum === 'invalid number' && initUnit === 'invalid unit') {
-      res.writeHead(200, { 'Content-Type': 'text/plain' });
-      res.write('invalid number and unit');
-      res.end();
+      return res.send('invalid number and unit');
     } else if (initNum === 'invalid number') {
-      res.writeHead(200, { 'Content-Type': 'text/plain' });
-      res.write('invalid number');
-      res.end();
+      return res.send('invalid number');
     } else if (initUnit === 'invalid unit') {
-      res.writeHead(200, { 'Content-Type': 'text/plain' });
-      res.write('invalid unit');
-      res.end();
+      return res.send('invalid unit');
     } else {
-      res.json({
+      return res.json({
         initNum: initNum,
         initUnit: initUnit,
         returnNum: returnNum,
@@ -41,11 +33,4 @@ module.exports = function (app) {
     }
   });
 
-  // GET - URL/hello
-  app.route('/hello').get((req, res) => {
-    res.writeHead(200, { 'Content-Type': 'text/plain' });
-    res.write('Hello');
-    res.end();
-  });
-  
 };

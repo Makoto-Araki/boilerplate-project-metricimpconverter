@@ -21,7 +21,7 @@ suite('Unit Tests', function() {
       assert.equal(convertHandler.getNum('3.1mi'), 3.1);
     });
     test('It should correctly return an error on a double-fraction', function() {
-      assert.equal(convertHandler.getNum('9/3/2mi'), 'invalid number and unit');
+      assert.equal(convertHandler.getNum('9/3/2mi'), 'invalid number');
     });
     test('It should correctly default to a numerical input of when no numerical input is provided', function() {
       assert.equal(convertHandler.getNum('mi'), 1);
