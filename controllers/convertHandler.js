@@ -1,18 +1,26 @@
 function ConvertHandler() {
   
-  // Regular expressions
-  const reg1 = /[0-9.]+/;
-  const reg2 = /km|mi|L|gal|lbs|kg/;
-  const reg3 = /[0-9.]+\/[0-9.]+\/[0-9.]+/;
-
   // Get number value from input(req.query.input)
   this.getNum = function(input) {
+    let reg1 = /[0-9.]*\/[0-9.]*\/[0-9.]*/;
+    let reg2 = /[0-9.]+/;
+    let reg3 = /([0-9.]+)(\/)([0-9.]+)/;
+    let temp;
     let result;
-    if (input.match(reg3)) {
+    if (reg1.test(input)) {
       result = 'invalid number'
     } else {
-      if (input.match(reg1)) {
-        result = Number(input.match(reg1)[0]);
+      if (reg2.test(input)) {
+        try {
+          if (reg3.test(input)) {
+            temp = reg3.exec(input.match(reg3)[0]);
+            result = Number(temp[1]) / Number(temp[3])
+          } else {
+            result = Number(input.match(reg2)[0]);
+          }
+        } catch {
+          result = 'invalid number';
+        }
       } else {
         result = Number(1);
       }
@@ -22,9 +30,16 @@ function ConvertHandler() {
 
   // Get unit name from input(req.query.input)
   this.getUnit = function(input) {
+    let reg1 = /^([0-9.\/]*)(km|mi|L|gal|lbs|kg)$/i;
+    let temp;
     let result;
-    if (input.match(reg2)) {
-      result = input.match(reg2)[0];
+    if (reg1.test(input)) {
+      temp = reg1.exec(input);
+      if (temp[2] === 'l' || temp[2] === 'L') {
+        result = 'L';
+      } else {
+        result = temp[2].toLowerCase();
+      }
     } else {
       result = 'invalid unit';
     }
