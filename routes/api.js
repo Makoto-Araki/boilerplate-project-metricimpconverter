@@ -17,13 +17,13 @@ module.exports = function (app) {
     let string = convertHandler.getString(initNum, initUnit, returnNum, returnUnit);
 
     if (initNum === 'invalid number' && initUnit === 'invalid unit') {
-      return res.send('invalid number and unit');
+      res.send('invalid number and unit');
     } else if (initNum === 'invalid number') {
-      return res.send('invalid number');
+      res.send('invalid number');
     } else if (initUnit === 'invalid unit') {
-      return res.send('invalid unit');
+      res.send('invalid unit');
     } else {
-      return res.json({
+      res.json({
         initNum: initNum,
         initUnit: initUnit,
         returnNum: returnNum,
